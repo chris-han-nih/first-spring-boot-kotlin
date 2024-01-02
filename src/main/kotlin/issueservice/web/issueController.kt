@@ -15,7 +15,7 @@ class IssueController(
 ) {
   @PostMapping
   fun createIssue(
-//    authUser: AuthUser,
+    authUser: AuthUser,
     @RequestBody issue: IssueRequest,
-  ) = issueService.createIssue(1, issue)
+  ) = issueService.createIssue(authUser.userId, issue)
 }
