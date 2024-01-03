@@ -1,6 +1,5 @@
 package issueservice.domain
 
-import com.fasterxml.jackson.databind.ser.Serializers.Base
 import jakarta.persistence.*
 
 @Entity

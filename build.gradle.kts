@@ -27,8 +27,10 @@ dependencies {
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
-  runtimeOnly("com.h2database:h2")
+  implementation("org.flywaydb:flyway-core")
+  implementation("org.flywaydb:flyway-mysql")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  runtimeOnly("com.mysql:mysql-connector-j")
 }
 
 tasks.withType<KotlinCompile> {

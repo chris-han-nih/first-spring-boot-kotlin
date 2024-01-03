@@ -2,6 +2,7 @@ package issueservice.service
 
 import issueservice.domain.Issue
 import issueservice.domain.IssueRepository
+import issueservice.domain.IssueStatus
 import issueservice.model.IssueRequest
 import issueservice.model.IssueResponse
 import jakarta.transaction.Transactional
@@ -24,4 +25,8 @@ class IssueService(
     )
     return IssueResponse(issueRepository.save(issue))
   }
+  
+  @Transactional
+  fun getIssues(userId: Long, status: IssueStatus) =
+    issueRepository.findAllByUserIdAndStatusOrderByCreatedAtDesc(userId, status)?.map { IssueResponse(it) }
 }
