@@ -29,4 +29,17 @@ class IssueService(
   @Transactional
   fun getIssues(userId: Long, status: IssueStatus) =
     issueRepository.findAllByUserIdAndStatusOrderByCreatedAtDesc(userId, status)?.map { IssueResponse(it) }
+  
+  @Transactional
+  fun updateIssue(userId: Long, id: Long, request: IssueRequest): IssueResponse {
+    val issue = issueRepository.findByIdAndUserId(id, userId) ?: throw Exception("Issue not found")
+    return with(issue) {
+      summary = request.summary
+      description = request.description
+      status = request.status
+      priority = request.priority
+      type = request.type
+      IssueResponse(issueRepository.save(this))
+    }
+  }
 }

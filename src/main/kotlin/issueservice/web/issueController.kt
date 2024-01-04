@@ -22,4 +22,11 @@ class IssueController(
     authUser: AuthUser,
     @RequestParam(required = false, defaultValue = "OPEN") status: IssueStatus,
   ) = issueService.getIssues(authUser.userId, status)
+  
+  @PutMapping("/{id}")
+  fun updateIssue(
+    authUser: AuthUser,
+    @PathVariable id: Long,
+    @RequestBody issue: IssueRequest,
+  ) = issueService.updateIssue(authUser.userId, id, issue)
 }
