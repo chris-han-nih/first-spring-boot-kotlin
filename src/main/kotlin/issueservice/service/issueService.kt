@@ -3,6 +3,7 @@ package issueservice.service
 import issueservice.domain.Issue
 import issueservice.domain.IssueRepository
 import issueservice.domain.IssueStatus
+import issueservice.exception.NotFoundException
 import issueservice.model.IssueRequest
 import issueservice.model.IssueResponse
 import jakarta.transaction.Transactional
@@ -32,7 +33,7 @@ class IssueService(
   
   @Transactional
   fun updateIssue(userId: Long, id: Long, request: IssueRequest): IssueResponse {
-    val issue = issueRepository.findByIdAndUserId(id, userId) ?: throw Exception("Issue not found")
+    val issue = issueRepository.findByIdAndUserId(id, userId) ?: throw NotFoundException("Issue not found")
     return with(issue) {
       summary = request.summary
       description = request.description

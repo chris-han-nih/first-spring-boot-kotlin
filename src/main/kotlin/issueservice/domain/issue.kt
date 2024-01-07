@@ -7,10 +7,12 @@ import jakarta.persistence.*
 class Issue(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  var id: Long? = null,
+  val id: Long? = null,
   var userId: Long,
   var summary: String,
   var description: String,
+  @OneToMany(fetch = FetchType.EAGER)
+  var comments: List<Comment> = listOf(),
   @Enumerated(EnumType.STRING)
   var type: IssueType,
   @Enumerated(EnumType.STRING)
